@@ -108,7 +108,7 @@ public class FeautresFragment extends Fragment {
         Lphonecall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               helper.phoneCall();
+
             }
         });
 

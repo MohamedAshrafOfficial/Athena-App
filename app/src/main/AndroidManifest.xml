@@ -39,7 +39,7 @@
         <activity
             android:name=".GuiderActivity"
             android:theme="@style/AppThemeNoActionBar" />
-        <activity android:name=".FeedbackActivity" />
+        <activity android:name=".FeedbackActivity" android:theme="@style/FullScreen"/>
         <activity
             android:name=".RecentActivity"
             android:theme="@style/AppThemeNoActionBar" />
