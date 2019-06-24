@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileImageActivity">
+
+    <TextView
+        android:id="@+id/helloName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello User"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="130dp"
+        android:textSize="30sp"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image"
+        android:layout_width="130dp"
+        android:layout_height="150dp"
+        android:src="@drawable/defaultpro"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FF000000"
+        android:layout_centerVertical="true"
+        android:onClick="selectProfileImage"
+        android:layout_centerHorizontal="true" />
+
+
+    <Button
+        android:id="@+id/selectImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select profile picture"
+        android:background="@android:color/transparent"
+        android:layout_below="@id/profile_image"
+        android:onClick="selectProfileImage"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/updateImageURL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Done"
+        android:background="@android:color/transparent"
+        android:layout_above="@+id/skip"
+        android:layout_marginBottom="50dp"
+        android:onClick="updateInfo"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="skip"
+        android:background="@android:color/transparent"
+        android:layout_alignParentBottom="true"
+        android:onClick="skip"
+        android:layout_alignParentRight="true"/>
+
+</RelativeLayout>

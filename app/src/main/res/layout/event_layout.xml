@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:textSize="20dp"
+        android:text="Add Event"
+        android:gravity="center"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"
+        android:background="@color/colorPrimaryDark"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+
+        <EditText
+            android:id="@+id/begin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:hint="begin"/>
+
+        <EditText
+            android:id="@+id/end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="end"
+            android:paddingLeft="10dp"
+
+            android:layout_below="@id/begin"/>
+
+        <EditText
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="title"
+            android:paddingLeft="10dp"
+
+            android:layout_below="@+id/end"/>
+
+        <EditText
+            android:id="@+id/country"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="country"
+            android:paddingLeft="10dp"
+
+            android:layout_below="@+id/title"/>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

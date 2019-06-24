@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".FeedbackActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#fff">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imgBackFeedback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/back"
+                android:layout_marginRight="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Feedback"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/imgBackFeedback"
+                android:textSize="19sp"
+                android:textColor="@color/colorPrimary"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+    <TextView
+        android:id="@+id/feedbackBal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="We are happy from feedback \n feel free to send what you need"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/blue_grey"
+        android:layout_margin="20dp"
+        android:textSize="15sp"
+        android:layout_below="@+id/toolbar"/>
+
+    <EditText
+        android:id="@+id/feedbackText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/feedbackBal"
+        android:lines="5"
+        android:background="#00000000"
+        android:hint="   Feedback"
+        android:layout_margin="10dp"/>
+
+    <Button
+        android:id="@+id/btnSendFeedback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send Feedback"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:textColor="#fff"
+        android:textAllCaps="false"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:background="@drawable/pager_background"
+        android:layout_below="@+id/feedbackText"/>
+
+</RelativeLayout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:backgroundTint="#fff"
+    android:background="@drawable/round_edit_text">
+
+    <TextView
+        android:id="@+id/removeDialog"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:text="Remove"
+        android:textColor="#313131"
+        android:textSize="17sp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/copyDialog"
+        android:layout_below="@+id/removeDialog"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:text="Copy"
+        android:textSize="17sp"
+        android:textColor="#313131"
+        android:layout_marginTop="20dp" />
+
+</RelativeLayout>

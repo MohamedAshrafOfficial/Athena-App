@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:backgroundTint="#fff"
+    android:layout_margin="20dp">
+    <!--   android:paddingTop="20dp"
+       android:paddingBottom="10dp"
+       android:paddingLeft="40dp"
+       android:paddingRight="40dp"-->
+
+    <TextView
+        android:id="@+id/personNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Person Name : "
+        android:textColor="#044D99"
+        android:textSize="14sp"
+        android:layout_alignBaseline="@+id/editTextPersonName"/>
+
+    <EditText
+        android:id="@+id/editTextPersonName"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#00000000"
+        android:layout_marginLeft="10dp"
+        android:hint="Type Person Name here"
+        android:layout_toRightOf="@+id/personNameTextView"/>
+
+    <Button
+        android:id="@+id/okDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OK"
+        android:background="@drawable/btnsignin_gradient"
+        android:layout_below="@id/editTextPersonName"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

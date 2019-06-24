@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:textSize="20dp"
+        android:text="Remainder"
+        android:gravity="center"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:background="@color/colorPrimaryDark"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
+        <EditText
+            android:id="@+id/rTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:hint="Title"/>
+
+        <EditText
+            android:id="@+id/rHours"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Hours"
+            android:paddingLeft="10dp"
+            android:layout_below="@id/rTitle"/>
+
+        <EditText
+            android:id="@+id/rMin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Minites"
+            android:paddingLeft="10dp"
+            android:layout_below="@+id/rHours"/>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

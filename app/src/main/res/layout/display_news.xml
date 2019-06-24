@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/source"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:textSize="20dp"
+        android:text="Source"
+        android:gravity="center"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:background="@color/colorPrimaryDark"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <ImageView
+            android:id="@+id/displayImageNews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/placeholder"
+            android:adjustViewBounds="true"/>
+
+        <TextView
+            android:id="@+id/displayNewsTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="#000"
+            android:layout_below="@+id/displayImageNews"/>
+        <TextView
+            android:id="@+id/displayNewsDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Discription"
+            android:textSize="18sp"
+            android:layout_marginBottom="10dp"
+            android:textColor="#000"
+            android:layout_below="@+id/displayNewsTitle"/>
+
+
+    </RelativeLayout>
+</LinearLayout>
