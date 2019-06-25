@@ -21,6 +21,7 @@
         android:textSize="18sp"
         android:textColor="#fff"
         android:padding="8dp"
+        android:layout_marginTop="10dp"
         android:layout_toLeftOf="@+id/userChatImage"
         android:layout_marginRight="10dp"/>
 

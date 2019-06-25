@@ -5,16 +5,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/background"
     tools:context=".ProfileImageActivity">
 
     <TextView
         android:id="@+id/helloName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello User"
+        android:text="Welcome in Athena App"
         android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textColor="#fff"
         android:layout_marginTop="130dp"
-        android:textSize="30sp"/>
+        android:textSize="25dp"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -37,6 +40,7 @@
         android:background="@android:color/transparent"
         android:layout_below="@id/profile_image"
         android:onClick="selectProfileImage"
+        android:textColor="#fff"
         android:layout_centerHorizontal="true"/>
 
     <Button
@@ -48,6 +52,7 @@
         android:layout_above="@+id/skip"
         android:layout_marginBottom="50dp"
         android:onClick="updateInfo"
+        android:textColor="#fff"
         android:layout_centerHorizontal="true"/>
 
     <Button
@@ -58,6 +63,9 @@
         android:background="@android:color/transparent"
         android:layout_alignParentBottom="true"
         android:onClick="skip"
+        android:textColor="#fff"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="40dp"
         android:layout_alignParentRight="true"/>
 
 </RelativeLayout>

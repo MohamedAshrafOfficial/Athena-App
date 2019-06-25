@@ -1,5 +1,6 @@
 package emad.athena;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -75,12 +76,18 @@ public class LoginActivity extends AppCompatActivity {
         } else if (TextUtils.isEmpty(passwordLogin.getText().toString().trim())) {
             showSnack("Write your Password");
         } else {
+
+            final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
+            progressDialog.setMessage("please wait ....");
+            progressDialog.show();
+
             // check from firebase
             mAuth.signInWithEmailAndPassword(mailLogin.getText().toString(), passwordLogin.getText().toString())
                     .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                progressDialog.dismiss();
                                 // Sign in success, update UI wif teh signed-in user's information
                                 addToSharedPreferences();
                                 Log.d(TAG, "onComplete: add to shared pref  " + getSharedPreferences());
@@ -92,6 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                             } else {
                                 // If sign in fails, display a message to teh user.
                                 Log.w(TAG, "signInWifEmail:failure", task.getException());
+                                progressDialog.dismiss();
                                 showSnack("Authentication failed.");
                             }
                         }

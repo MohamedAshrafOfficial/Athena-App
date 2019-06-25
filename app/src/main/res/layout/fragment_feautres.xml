@@ -98,7 +98,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="10dp"
-                                    android:background="@drawable/round_edit_text">
+                                    android:background="@drawable/circil_shape">
 
                                     <ImageView
                                         android:id="@+id/smsIcons"
@@ -127,7 +127,7 @@
                                     android:layout_margin="10dp"
                                     android:layout_toRightOf="@+id/LMessage"
                                     android:layout_weight="1"
-                                    android:background="@drawable/round_edit_text"
+                                    android:background="@drawable/circil_shape"
                                     android:orientation="horizontal">
 
                                     <ImageView
@@ -156,7 +156,7 @@
                                     android:layout_height="match_parent"
                                     android:layout_margin="10dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/round_edit_text"
+                                    android:background="@drawable/circil_shape"
                                     android:orientation="horizontal">
 
                                     <ImageView
@@ -237,7 +237,7 @@
                                     android:layout_marginTop="5dp"
                                     android:layout_marginBottom="10dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/round_edit_text"
+                                    android:background="@drawable/circil_shape"
                                     android:orientation="horizontal">
 
 
@@ -268,7 +268,7 @@
                                     android:layout_marginTop="5dp"
                                     android:layout_marginBottom="10dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/round_edit_text"
+                                    android:background="@drawable/circil_shape"
                                     android:orientation="horizontal">
 
                                     <ImageView
@@ -297,7 +297,7 @@
                                     android:layout_marginTop="5dp"
                                     android:layout_marginBottom="10dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/round_edit_text"
+                                    android:background="@drawable/circil_shape"
                                     android:orientation="horizontal">
 
 
@@ -328,7 +328,7 @@
                                     android:layout_marginTop="5dp"
                                     android:layout_marginBottom="10dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/round_edit_text"
+                                    android:background="@drawable/circil_shape"
                                     android:orientation="horizontal">
 
                                     <ImageView
@@ -403,14 +403,14 @@
 
                                 <LinearLayout
                                     android:id="@+id/Levent"
-                                    android:layout_width="250dp"
+                                    android:layout_width="270dp"
                                     android:layout_height="match_parent"
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
                                     android:layout_marginTop="5dp"
                                     android:layout_marginBottom="10dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/round_edit_text"
+                                    android:background="@drawable/circil_shape"
                                     android:gravity="center"
                                     android:orientation="horizontal">
 
@@ -437,14 +437,14 @@
 
                                 <LinearLayout
                                     android:id="@+id/Lremender"
-                                    android:layout_width="250dp"
+                                    android:layout_width="290dp"
                                     android:layout_height="match_parent"
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
                                     android:layout_marginTop="5dp"
                                     android:layout_marginBottom="10dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/round_edit_text"
+                                    android:background="@drawable/circil_shape"
                                     android:gravity="center"
                                     android:orientation="horizontal">
 
@@ -483,7 +483,7 @@
                                     android:layout_height="match_parent"
                                     android:layout_margin="10dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/round_edit_text"
+                                    android:background="@drawable/circil_shape"
                                     android:gravity="center"
                                     android:orientation="horizontal">
 
@@ -512,13 +512,13 @@
                                     android:layout_height="match_parent"
                                     android:layout_margin="10dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/round_edit_text"
+                                    android:background="@drawable/circil_shape"
                                     android:gravity="center">
 
 
                                     <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginRight="5dp"
                                         android:padding="2dp"
@@ -531,7 +531,7 @@
                                         android:layout_gravity="center"
                                         android:text="About Weather "
                                         android:textColor="#7C7C7C"
-                                        android:textSize="15dp" />
+                                        android:textSize="12dp" />
 
                                 </LinearLayout>
 
@@ -563,6 +563,7 @@
                 android:layout_height="wrap_content"
                 android:text="Egypt Trends"
                 android:textColor="#C741FF"
+                android:textStyle="bold"
                 android:layout_toRightOf="@+id/icoTrend"/>
 
         </RelativeLayout>

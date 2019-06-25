@@ -1,5 +1,6 @@
 package emad.athena;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -101,12 +102,19 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
             if (passwordReg.getText().toString().equals(rePasswordReg.getText().toString())) {
                 Log.d(TAG, "onClick: HELLO");
+
+
+                final ProgressDialog progressDialog = new ProgressDialog(RegisterActivity.this);
+                progressDialog.setMessage("please wait ....");
+                progressDialog.show();
+
                 // add user to firebase
                 mAuth.createUserWithEmailAndPassword(mailReg.getText().toString(), passwordReg.getText().toString())
                         .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
+                                    progressDialog.dismiss();
                                     Log.d(TAG, "createUserWithEmail:success");
                                     FirebaseUser currentUser = mAuth.getCurrentUser();
                                     Log.d(TAG, "onComplete: " + currentUser.getUid());
@@ -118,6 +126,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w(TAG, "createUserWifEmail:failure", task.getException());
+                                    progressDialog.dismiss();
                                     showSnack("Authentication failed.");
                                 }
                             }

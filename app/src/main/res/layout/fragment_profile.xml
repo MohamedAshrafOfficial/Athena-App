@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/fragment_background"
-        android:layout_margin="5dp">
+         android:layout_margin="8dp">
 
         <RelativeLayout
             android:id="@+id/background"
@@ -46,13 +46,13 @@
 
                 <TextView
                     android:id="@+id/viewUserName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
                     android:text="Mohamed Ashraf"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold|italic" />
 
             </LinearLayout>
         </LinearLayout>
@@ -76,8 +76,8 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="35dp"
+                    android:layout_height="40dp"
                     android:tint="#0575E6"
                     android:src="@drawable/icon_mail" />
 

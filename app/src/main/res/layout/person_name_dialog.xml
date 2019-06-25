@@ -16,7 +16,8 @@
         android:layout_height="wrap_content"
         android:text="Person Name : "
         android:textColor="#044D99"
-        android:textSize="14sp"
+        android:textSize="18sp"
+        android:textStyle="bold|italic"
         android:layout_alignBaseline="@+id/editTextPersonName"/>
 
     <EditText

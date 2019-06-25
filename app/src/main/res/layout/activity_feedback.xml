@@ -22,7 +22,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:src="@drawable/back"
+                android:src="@drawable/ic_arrow_back_black_24dp"
+                android:tint="@color/colorPrimary"
                 android:layout_marginRight="20dp"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -39,7 +40,7 @@
         android:id="@+id/feedbackBal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="We are happy from feedback \n feel free to send what you need"
+        android:text="We are happy from feedback . feel free \n to send what you need"
         android:layout_centerHorizontal="true"
         android:textColor="@color/blue_grey"
         android:layout_margin="20dp"
@@ -53,7 +54,10 @@
         android:layout_below="@+id/feedbackBal"
         android:lines="5"
         android:background="#00000000"
-        android:hint="   Feedback"
+        android:paddingLeft="20dp"
+        android:textColor="#000"
+        android:textColorHint="#858585"
+        android:hint="entre your Feedback"
         android:layout_margin="10dp"/>
 
     <Button

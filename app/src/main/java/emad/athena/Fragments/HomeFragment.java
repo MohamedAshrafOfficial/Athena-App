@@ -280,9 +280,9 @@ public class HomeFragment extends Fragment {
         presavedQuestionsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-               for (DataSnapshot snapshot :dataSnapshot.getChildren()){
-                   presavedQuestions.add(snapshot.getValue(Question.class));
-               }
+                for (DataSnapshot snapshot :dataSnapshot.getChildren()){
+                    presavedQuestions.add(snapshot.getValue(Question.class));
+                }
             }
 
             @Override
@@ -311,7 +311,7 @@ public class HomeFragment extends Fragment {
             public void run() {
                 try {
                     Thread.sleep(5000);
-                allApps = getAllApps();
+                    allApps = getAllApps();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

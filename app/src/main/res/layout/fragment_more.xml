@@ -8,159 +8,167 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/fragment_background"
-        android:layout_margin="5dp">
+        android:layout_margin="5dp"
+        android:background="@drawable/fragment_background">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgLogo"
             android:layout_width="90dp"
             android:layout_height="90dp"
-            android:src="@drawable/logo_noshadow"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="50dp"
-            android:layout_marginLeft="20dp" />
+            android:src="@drawable/logo_noshadow" />
 
         <TextView
             android:id="@+id/mAppName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Athena Assistant"
-            android:layout_toRightOf="@+id/imgLogo"
-            android:layout_marginTop="70dp"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="70dp"
+            android:layout_toRightOf="@+id/imgLogo"
+            android:text="Athena Assistant"
             android:textColor="@color/black"
-            android:textSize="18sp"/>
+            android:textSize="20dp"
+            android:textStyle="bold|italic" />
 
         <TextView
             android:id="@+id/mAppDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="to make life easier"
-            android:layout_toRightOf="@+id/imgLogo"
             android:layout_below="@+id/mAppName"
             android:layout_marginLeft="20dp"
-            android:textColor="@color/black2"/>
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/imgLogo"
+            android:text="to make life easier"
+            android:textColor="#999999"
+            android:textSize="15dp"
+            android:textStyle="bold" />
 
 
         <RelativeLayout
             android:id="@+id/RecentLayout"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/imgLogo"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_height="wrap_content"
             android:padding="10dp">
 
             <ImageView
                 android:id="@+id/recentIco"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/recent"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="20dp"
+                android:src="@drawable/recent" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/recentIco"
                 android:text="Recent"
                 android:textColor="@color/black"
+
                 android:textSize="17sp"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/recentIco"/>
+                android:textStyle="bold" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/guideLayout"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/RecentLayout"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_height="wrap_content"
             android:padding="10dp">
 
             <ImageView
                 android:id="@+id/guideIco"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/guide"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="20dp"
+                android:src="@drawable/guide" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/guideIco"
                 android:text="Help"
                 android:textColor="@color/black"
+
                 android:textSize="17sp"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/guideIco"/>
+                android:textStyle="bold" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/feedbackLayout"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/guideLayout"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_height="wrap_content"
             android:padding="10dp">
 
             <ImageView
                 android:id="@+id/feedbackIco"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_feedback_black_24dp"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="20dp"
+                android:src="@drawable/ic_feedback_black_24dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/feedbackIco"
                 android:text="Feedback"
                 android:textColor="@color/black"
+
                 android:textSize="17sp"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/feedbackIco"/>
+                android:textStyle="bold" />
         </RelativeLayout>
 
 
         <RelativeLayout
             android:id="@+id/signoutLayout"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/feedbackLayout"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_height="wrap_content"
             android:padding="10dp">
 
             <ImageView
                 android:id="@+id/signoutIco"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/signout"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="20dp"
+                android:src="@drawable/signout" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/signoutIco"
                 android:text="Sign out"
                 android:textColor="@color/black"
                 android:textSize="17sp"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/signoutIco"/>
+
+                android:textStyle="bold" />
         </RelativeLayout>
-
-
-
-
 
 
     </RelativeLayout>
