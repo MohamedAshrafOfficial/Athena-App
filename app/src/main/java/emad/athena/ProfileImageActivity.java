@@ -1,5 +1,6 @@
 package emad.athena;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -83,6 +84,9 @@ public class ProfileImageActivity extends AppCompatActivity {
     }
 
     private void addImageToFirebase() {
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Uploading Image.... \n it depends on your internet connection");
+        progressDialog.show();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
@@ -98,7 +102,7 @@ public class ProfileImageActivity extends AppCompatActivity {
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
+                progressDialog.hide();
                 Log.d(TAG, "onSuccess: SUCCESS *****************************");
                 storageRef = FirebaseStorage.getInstance().getReference().child("users/").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
                 storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -117,6 +121,7 @@ public class ProfileImageActivity extends AppCompatActivity {
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
+                                progressDialog.hide();
                                 Log.d(TAG, "onFailure: failed update url");
                             }
                         });

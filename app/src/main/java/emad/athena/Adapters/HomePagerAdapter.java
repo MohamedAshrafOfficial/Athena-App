@@ -28,4 +28,6 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return 4;
     }
+
+
 }

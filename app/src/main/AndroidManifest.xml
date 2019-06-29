@@ -23,10 +23,10 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ProfileImageActivity" android:theme="@style/FullScreen"></activity>
         <activity android:name=".RegisterActivity" android:theme="@style/FullScreen"/>
-        <activity android:name=".ResetPasswordFirstActivty" />
+        <activity android:name=".ResetPasswordFirstActivty" android:theme="@style/FullScreen" />
         <activity
             android:name=".PagerActivity"
-            android:theme="@style/AppThemeNoActionBar" />
+            android:theme="@style/FullScreen" />
         <activity
             android:name=".WelcomeActivity"
             android:theme="@style/AppThemeNoActionBar">
@@ -39,7 +39,7 @@
         <activity
             android:name=".GuiderActivity"
             android:theme="@style/AppThemeNoActionBar" />
-        <activity android:name=".FeedbackActivity" android:theme="@style/FullScreen"/>
+        <activity android:name=".FeedbackActivity" android:theme="@style/AppThemeNoActionBar"/>
         <activity
             android:name=".RecentActivity"
             android:theme="@style/AppThemeNoActionBar" />

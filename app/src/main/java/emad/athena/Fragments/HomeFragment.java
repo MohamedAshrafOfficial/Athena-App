@@ -22,6 +22,7 @@ import android.provider.MediaStore;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -98,7 +99,7 @@ import static android.app.Activity.RESULT_OK;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements TextToSpeech.OnInitListener {
 
     Helper helper = new Helper();
     private FirebaseAuth mAuth;
@@ -117,6 +118,9 @@ public class HomeFragment extends Fragment {
     RelativeLayout homePageFragment;
     String voice;
     ImageView speechIcon;
+    TextToSpeech tts;
+    ImageView voiceChat;
+    int flagReadVoice = 1; // if 1 read else no
 
     SpeechRecognizer speechRecognizer;
     Intent intentSpeech;
@@ -167,7 +171,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         mAuth = FirebaseAuth.getInstance();
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
-
+        tts = new TextToSpeech(getActivity(),this);
         initViews(view);
         startVoiceInput();
         initRecyclerView();
@@ -214,6 +218,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
+
+
     }
 
     public void initViews(View view){
@@ -221,6 +227,7 @@ public class HomeFragment extends Fragment {
         chatRecycler = view.findViewById(R.id.chatRecycler);
         speechIcon = view.findViewById(R.id.speechIcon);
         voiceEditText = view.findViewById(R.id.voiceEditText);
+        voiceChat = view.findViewById(R.id.voiceChat);
 
         voiceEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -263,6 +270,9 @@ public class HomeFragment extends Fragment {
                             Log.d(TAG, "onResults Answer : " + answer);
                             chatAdapter.notifyDataSetChanged();
                             chatRecycler.smoothScrollToPosition(chatList.size()-1);
+                            if (flagReadVoice==1){
+                                tts.speak(answer, TextToSpeech.QUEUE_FLUSH,null);
+                            }
                         }
                         voiceEditText.setText("");
 
@@ -272,6 +282,19 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
+        voiceChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (flagReadVoice == 1){
+                    voiceChat.setImageResource(R.drawable.mute);
+                    flagReadVoice = 0;
+                }else {
+                    voiceChat.setImageResource(R.drawable.sound);
+                    flagReadVoice = 1;
+                }
+            }
+        });
+
     }
 
     public void initLists(){
@@ -336,13 +359,14 @@ public class HomeFragment extends Fragment {
 
         chatRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         chatAdapter = new ChatAdapter(getActivity(), chatList);
+
         chatRecycler.setAdapter(chatAdapter);
-        chatRecycler.setOnTouchListener(new View.OnTouchListener() {
+        chatRecycler.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                voiceEditText.clearFocus();
+            public void onClick(View v) {
+                voiceEditText.setFocusableInTouchMode(false);
+                voiceEditText.setFocusable(false);
                 flagMicOrText=1;
-                return true;
             }
         });
     }
@@ -402,7 +426,11 @@ public class HomeFragment extends Fragment {
 
                             chatList.add(new Chat("Connecting To Server ...", 0, null, profilePic));
                             chatAdapter.notifyDataSetChanged();
-                            chatRecycler.smoothScrollToPosition(chatList.size()-1);                            recentQuestion = new Recent(voice,answer,helper.getDate(),false);
+                            chatRecycler.smoothScrollToPosition(chatList.size()-1);
+                            recentQuestion = new Recent(voice,answer,helper.getDate(),false);
+                            if (flagReadVoice==1){
+                                tts.speak(answer, TextToSpeech.QUEUE_FLUSH,null);
+                            }
                             SendQuetionToFirebase(recentQuestion);
                         }else {
                             chatList.add(new Chat(answer, 0, null, profilePic));
@@ -799,7 +827,7 @@ public class HomeFragment extends Fragment {
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
             startActivityForResult(intent, SEND_RECOGNIZE_IMAGE_REQUEST);
-            return "wait for moments";
+            return "wait";
         }
 
         else if ((filterdQuestion.startsWith("play")) || (filterdQuestion.startsWith("listen")) || (filterdQuestion.startsWith("hear"))) {
@@ -1044,5 +1072,10 @@ public class HomeFragment extends Fragment {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         MySingleton.getmInsance(getContext()).addToRequestQueue(stringRequest);
         return requestResponse[0];
+    }
+
+    @Override
+    public void onInit(int status) {
+
     }
 }

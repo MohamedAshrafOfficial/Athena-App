@@ -88,9 +88,9 @@ public class PagerActivity extends AppCompatActivity {
         mViewPager.setCurrentItem(page);
         updateIndicators(page);
 
-        final int color1 = ContextCompat.getColor(this, R.color.Cyan);
-        final int color2 = ContextCompat.getColor(this, R.color.orange);
-        final int color3 = ContextCompat.getColor(this, R.color.green);
+        final int color1 = ContextCompat.getColor(this, R.color.pager2);
+        final int color2 = ContextCompat.getColor(this, R.color.pager1);
+        final int color3 = ContextCompat.getColor(this, R.color.pager3);
 
         final int[] colorList = new int[]{color1, color2, color3};
 
@@ -202,7 +202,7 @@ public class PagerActivity extends AppCompatActivity {
 
         ImageView img;
 
-        int[] bgs = new int[]{R.drawable.ic_access_time_black_24dp, R.drawable.ic_account_circle_black_24dp, R.drawable.ic_local_shipping_black_24dp};
+        int[] bgs = new int[]{R.drawable.logo_white, R.drawable.chat_pager, R.drawable.voice_pager};
 
         public PlaceholderFragment() {
         }
@@ -228,12 +228,12 @@ public class PagerActivity extends AppCompatActivity {
 
 
             if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
-                textView.setText("Page One");
+                textView.setText("Perfect choice for accomplishing a small job");
             } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
-                textView.setText("Page Two");
+                textView.setText("Analyzes user's queries and understand user's message");
 
             } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 3) {
-                textView.setText("Page Three");
+                textView.setText("Analyzes user's queries and understand user's Voice");
             }
 
 

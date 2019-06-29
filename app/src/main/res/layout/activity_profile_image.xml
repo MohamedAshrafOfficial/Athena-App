@@ -9,24 +9,32 @@
     tools:context=".ProfileImageActivity">
 
     <TextView
+        android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome in Athena App"
+        android:layout_centerHorizontal="true"
+        android:textColor="#fff"
+        android:layout_marginTop="130dp"
+        android:textSize="25dp"/>
+
+    <TextView
         android:id="@+id/helloName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Welcome in Athena App"
         android:layout_centerHorizontal="true"
-        android:textStyle="bold"
         android:textColor="#fff"
-        android:layout_marginTop="130dp"
-        android:textSize="25dp"/>
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/welcome"
+        android:textSize="17sp"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/profile_image"
         android:layout_width="130dp"
         android:layout_height="150dp"
-        android:src="@drawable/defaultpro"
-        app:civ_border_width="2dp"
-        app:civ_border_color="#FF000000"
+        android:src="@drawable/placeperson"
         android:layout_centerVertical="true"
         android:onClick="selectProfileImage"
         android:layout_centerHorizontal="true" />
@@ -48,11 +56,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Done"
-        android:background="@android:color/transparent"
+        android:background="#524E4E"
         android:layout_above="@+id/skip"
         android:layout_marginBottom="50dp"
         android:onClick="updateInfo"
         android:textColor="#fff"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
         android:layout_centerHorizontal="true"/>
 
     <Button
@@ -64,8 +74,8 @@
         android:layout_alignParentBottom="true"
         android:onClick="skip"
         android:textColor="#fff"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_alignParentRight="true"/>
 
 </RelativeLayout>

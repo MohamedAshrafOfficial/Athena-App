@@ -42,14 +42,6 @@ public class MainActivity extends AppCompatActivity {
         handleViews();
     }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//
-//        if (mAuth.getCurrentUser()==null)
-//            startActivity(new Intent(this, LoginActivity.class));
-//
-//    }
 
     public void initViews(){
         moreMenu = findViewById(R.id.moreMenu);

@@ -13,7 +13,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:src="@drawable/ic_arrow_back_black_24dp"
+        android:src="@drawable/back_reg"
         android:tint="#fff"
         app:layout_constraintBottom_toBottomOf="@+id/rootRegister"
         app:layout_constraintEnd_toEndOf="@+id/rootRegister"

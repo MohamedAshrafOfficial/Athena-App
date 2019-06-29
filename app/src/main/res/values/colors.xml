@@ -291,4 +291,8 @@
     <color name="cyan_50">#E0F7FA</color>
     <color name="amber_50">#FFF8E1</color>
     <color name="purple_50">#F3E5F5</color>
+
+    <color name="pager1">#333742</color>
+    <color name="pager2">#36454a</color>
+    <color name="pager3">#1a1e28</color>
 </resources>
