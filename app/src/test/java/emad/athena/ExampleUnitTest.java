@@ -2,6 +2,9 @@ package emad.athena;
 
 import org.junit.Test;
 
+import emad.athena.Fragments.HomeFragment;
+import emad.athena.Model.Recent;
+
 import static org.junit.Assert.*;
 
 /**
@@ -11,7 +14,17 @@ import static org.junit.Assert.*;
  */
 public class ExampleUnitTest {
     @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+    public void getNlpResponse_isCorrect()throws Exception{
+        HomeFragment home = new HomeFragment();
+        String response = home.getNlpAnswerTest("hi", null, true);
+        assertEquals("Wrong","Hi,There",response);
+
+    }
+
+    @Test
+    public void postQuestion(){
+        HomeFragment homeFragment = new HomeFragment();
+        int result = homeFragment.SendQuetionToFirebase(new Recent("Hello","Hello Dear", "22-6",true));
+        assertEquals("wrong", 1, result,0.0);
     }
 }

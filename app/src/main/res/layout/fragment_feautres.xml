@@ -96,7 +96,7 @@
                                 <RelativeLayout
                                     android:id="@+id/LMessage"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="40dp"
                                     android:layout_margin="10dp"
                                     android:background="@drawable/circil_shape">
 
@@ -123,7 +123,7 @@
                                 <LinearLayout
                                     android:id="@+id/Lphonecall"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="40dp"
                                     android:layout_margin="10dp"
                                     android:layout_toRightOf="@+id/LMessage"
                                     android:layout_weight="1"
@@ -153,7 +153,7 @@
                                 <LinearLayout
                                     android:id="@+id/Ltimer"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
+                                    android:layout_height="40dp"
                                     android:layout_margin="10dp"
                                     android:layout_weight="1"
                                     android:background="@drawable/circil_shape"
@@ -232,7 +232,7 @@
                                 <LinearLayout
                                     android:id="@+id/lgame"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
+                                    android:layout_height="40dp"
                                     android:layout_margin="10dp"
                                     android:layout_marginTop="5dp"
                                     android:layout_marginBottom="10dp"
@@ -263,7 +263,7 @@
                                 <LinearLayout
                                     android:id="@+id/Lmusic"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
+                                    android:layout_height="40dp"
                                     android:layout_margin="10dp"
                                     android:layout_marginTop="5dp"
                                     android:layout_marginBottom="10dp"
@@ -292,7 +292,7 @@
                                 <LinearLayout
                                     android:id="@+id/Lvideo"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
+                                    android:layout_height="40dp"
                                     android:layout_margin="10dp"
                                     android:layout_marginTop="5dp"
                                     android:layout_marginBottom="10dp"
@@ -323,7 +323,7 @@
                                 <LinearLayout
                                     android:id="@+id/Lphotos"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
+                                    android:layout_height="40dp"
                                     android:layout_margin="10dp"
                                     android:layout_marginTop="5dp"
                                     android:layout_marginBottom="10dp"
@@ -403,7 +403,7 @@
 
                                 <LinearLayout
                                     android:id="@+id/Levent"
-                                    android:layout_width="270dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
@@ -437,7 +437,7 @@
 
                                 <LinearLayout
                                     android:id="@+id/Lremender"
-                                    android:layout_width="290dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
@@ -479,7 +479,7 @@
 
                                 <LinearLayout
                                     android:id="@+id/Lnews"
-                                    android:layout_width="210dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:layout_margin="10dp"
                                     android:layout_weight="1"
@@ -508,7 +508,7 @@
 
                                 <LinearLayout
                                     android:id="@+id/LWeather"
-                                    android:layout_width="210dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:layout_margin="10dp"
                                     android:layout_weight="1"
@@ -529,7 +529,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
-                                        android:text="About Weather "
+                                        android:text="Weather NOW"
                                         android:textColor="#7C7C7C"
                                         android:textSize="12dp" />
 
@@ -563,7 +563,7 @@
                 android:layout_height="wrap_content"
                 android:text="Egypt Trends"
                 android:textColor="#C741FF"
-                android:textStyle="bold"
+                android:textSize="15sp"
                 android:layout_toRightOf="@+id/icoTrend"/>
 
         </RelativeLayout>

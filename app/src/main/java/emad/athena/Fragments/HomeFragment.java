@@ -4,6 +4,7 @@ package emad.athena.Fragments;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.ContentValues;
 import android.content.DialogInterface;
@@ -11,13 +12,10 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.MediaStore;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
@@ -27,7 +25,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -38,8 +35,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -58,7 +53,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -125,6 +119,7 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
     SpeechRecognizer speechRecognizer;
     Intent intentSpeech;
 
+    ArrayList<App> names = new ArrayList<App>();
 
     //constants
     private static final int CAMERA_REQUEST_CODE = 200;
@@ -160,6 +155,7 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
 
     ChatbotResponse chatbotResponse = new ChatbotResponse();
 
+    ProgressDialog progressDialog;
     private static final String TAG = "HomeFragment";
     public HomeFragment() {
         // Required empty public constructor
@@ -181,17 +177,19 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
     @Override
     public void onStart() {
         super.onStart();
+        Log.d(TAG, "onStart: Profile");
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser == null)
             startActivity(new Intent(getContext(), LoginActivity.class));
         else
             getCurrentUser();
+        initLists();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        initLists();
+        Log.d(TAG, "onResume: HOme");
         cameraPermission = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
     }
@@ -203,11 +201,7 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 user = dataSnapshot.getValue(User.class);
-                Log.d(TAG, "onDataChange: *********************************");
-                Log.d(TAG, "onDataChange: " + user.getFirebaseID());
-                Log.d(TAG, "onDataChange: " + user.getName());
-                Log.d(TAG, "onDataChange: " + user.getMail());
-                Log.d(TAG, "onDataChange: " + user.getPictureURL());
+
                 profilePic = user.getPictureURL();
                 chatAdapter.notifyDataSetChanged();
             }
@@ -319,7 +313,6 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot :dataSnapshot.getChildren()){
-                    Log.d(TAG, "onDataChange: " + snapshot);
                     stopWordsList.add(snapshot.getValue(String.class));
                 }
             }
@@ -343,8 +336,7 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
     }
 
     public ArrayList<App> getAllApps() {
-        ArrayList<App> names = new ArrayList<App>();
-
+        names.clear();
         List<PackageInfo> packs = getActivity().getPackageManager().getInstalledPackages(PackageManager.GET_META_DATA);
         for (int i = 0; i < packs.size(); i++) {
             PackageInfo p = packs.get(i);
@@ -355,8 +347,6 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
     }
 
     public void initRecyclerView() {
-        chatList = new ArrayList<>();
-
         chatRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         chatAdapter = new ChatAdapter(getActivity(), chatList);
 
@@ -562,13 +552,16 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
                 final Uri uri = data.getData();
                 Log.d(TAG, "onActivityResult: " + getContext().getContentResolver().getType(uri));
 
-                final Dialog dialog = new Dialog(getContext(), android.R.style.Theme_Dialog);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//                final Dialog dialog = new Dialog(getContext(), android.R.style.Theme_Dialog);
+//                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//                dialog.setContentView(R.layout.person_name_dialog);
+//                dialog.setCanceledOnTouchOutside(false);
+//                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//                dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+//                dialog.getWindow().setLayout(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
+
+                final Dialog dialog = new Dialog(getActivity());
                 dialog.setContentView(R.layout.person_name_dialog);
-                dialog.setCanceledOnTouchOutside(false);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-                dialog.getWindow().setLayout(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT);
 
                 final EditText editTextPersonName = dialog.findViewById(R.id.editTextPersonName);
                 Button btnOK = dialog.findViewById(R.id.okDialog);
@@ -579,6 +572,9 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
                         dialog.dismiss();
                         try {
                             bitmapRecognition = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
+                            chatList.add(new Chat(editTextPersonName.getText().toString(), 1, uri, profilePic));
+                            chatAdapter.notifyDataSetChanged();
+                            chatRecycler.smoothScrollToPosition(chatList.size() - 1);
                             addPersonToFirebase();
 
                         } catch (IOException e) {
@@ -595,6 +591,9 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
                 Log.d(TAG, "onActivityResult: " + getContext().getContentResolver().getType(uri));
                 try {
                     bitmapRecognition = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
+                    chatList.add(new Chat("this", 1, uri, profilePic));
+                    chatAdapter.notifyDataSetChanged();
+                    chatRecycler.smoothScrollToPosition(chatList.size() - 1);
                     addPersonToFirebase();
 
                 } catch (IOException e) {
@@ -686,7 +685,7 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
                 sb.append("\n");
             }
             Log.d(TAG, "onActivityResult sb : " + sb.toString());
-            chatList.add(new Chat("read page", 1, uri, profilePic));
+            chatList.add(new Chat("Here is the image", 1, uri, profilePic));
             chatList.add(new Chat(sb.toString(), 0, null, profilePic));
             chatAdapter.notifyDataSetChanged();
             chatRecycler.smoothScrollToPosition(chatList.size()-1);
@@ -720,7 +719,7 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
                     public void onSuccess(Uri uri) {
                         Log.d(TAG, "onSuccess: --------------" + uri.toString());
                         imgURLRecognition = uri.toString();
-                        chatList.add(new Chat("read page",1,imgUri,profilePic));
+                        chatList.add(new Chat("reading Arabic page", 1, imgUri, profilePic));
                         chatAdapter.notifyDataSetChanged();
                         chatRecycler.smoothScrollToPosition(chatList.size()-1);                        readArabicPage(imgURLRecognition);
                     }
@@ -750,11 +749,11 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d(TAG, "getChatbotAnswer: " + error.getMessage());
-                Log.d(TAG, "getChatbotAnswer: " + error);
-                Log.d(TAG, "getChatbotAnswer: " + error.networkResponse);
-                Log.d(TAG, "getChatbotAnswer: " + error.getLocalizedMessage());
-                Log.d(TAG, "getChatbotAnswer: " + error.getNetworkTimeMs());
+                Log.d(TAG, "readArabicPage: " + error.getMessage());
+                Log.d(TAG, "readArabicPage: " + error);
+                Log.d(TAG, "readArabicPage: " + error.networkResponse);
+                Log.d(TAG, "readArabicPage: " + error.getLocalizedMessage());
+                Log.d(TAG, "readArabicPage: " + error.getNetworkTimeMs());
                 chatList.add(new Chat("try later", 0, null, profilePic));
                 chatAdapter.notifyDataSetChanged();
                 chatRecycler.smoothScrollToPosition(chatList.size()-1);            }
@@ -910,12 +909,18 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
                         chatbotResponse =new Gson().fromJson(response, ChatbotResponse.class);
                         chatList.add(new Chat(chatbotResponse.getReply(), 0, null, profilePic));
                         chatAdapter.notifyDataSetChanged();
-                        chatRecycler.smoothScrollToPosition(chatList.size()-1);                        recentQuestion = new Recent(voice,chatbotResponse.getReply(),helper.getDate(),false);
+                        chatRecycler.smoothScrollToPosition(chatList.size() - 1);
+                        recentQuestion = new Recent(voice, chatbotResponse.getReply(), helper.getDate(), false);
                         SendQuetionToFirebase(recentQuestion);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                chatList.add(new Chat("Sync with Google", 0, null, profilePic));
+                chatAdapter.notifyDataSetChanged();
+                chatRecycler.smoothScrollToPosition(chatList.size() - 1);
+                // direct google
+                googleDirect(question);
                 Log.d(TAG, "getChatbotAnswer: " + error.getMessage());
                 Log.d(TAG, "getChatbotAnswer: " + error);
                 Log.d(TAG, "getChatbotAnswer: " + error.networkResponse);
@@ -940,7 +945,14 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
         MySingleton.getmInsance(getContext()).addToRequestQueue(stringRequest);
     }
 
-    public void SendQuetionToFirebase(Recent rQuestion){
+    public String googleDirect(String query) {
+        Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
+        intent.putExtra(SearchManager.QUERY, query); // query contains search string
+        startActivity(intent);
+        return "Done";
+    }
+
+    public int SendQuetionToFirebase(Recent rQuestion){
         questionsReference = FirebaseDatabase.getInstance().getReference().child("Recent").child(mAuth.getCurrentUser().getUid()).push();
         rQuestion.setFirebaseid(questionsReference.getKey());
         questionsReference.setValue(rQuestion).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -953,10 +965,14 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
                 }
             }
         });
+        return 1;
     }
 
     // Face Recognition
     private void addPersonToFirebase() {
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("please wait ....");
+        progressDialog.show();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmapRecognition.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
@@ -1006,6 +1022,9 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
                     @Override
                     public void onResponse(String response) {
                         Log.d(TAG, "onResponse: RESPONSE ADD " + response);
+                        progressDialog.hide();
+                        chatList.add(new Chat("Person added Successfully", 0, null, profilePic));
+
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -1015,6 +1034,8 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
                 Log.d(TAG, "onErrorResponse: " + error.networkResponse);
                 Log.d(TAG, "onErrorResponse: " + error.getLocalizedMessage());
                 Log.d(TAG, "onErrorResponse: " + error.getNetworkTimeMs());
+                chatList.add(new Chat("Use another image", 0, null, profilePic));
+                progressDialog.hide();
 
             }
         }) {
@@ -1044,6 +1065,9 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
                         Log.d(TAG, "onResponse: RESPONSE Recognize " + response);
 //                        responseV.setText(response);
                         requestResponse[0] = response;
+                        progressDialog.hide();
+                        chatList.add(new Chat(requestResponse[0], 0, null, profilePic));
+
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -1054,7 +1078,8 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
                 Log.d(TAG, "onErrorResponse: " + error.getLocalizedMessage());
                 Log.d(TAG, "onErrorResponse: " + error.getNetworkTimeMs());
                 requestResponse[0] = error.getMessage();
-
+                chatList.add(new Chat(requestResponse[0], 0, null, profilePic));
+                progressDialog.hide();
             }
         }) {
             @Override

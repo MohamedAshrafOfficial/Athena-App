@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -53,12 +52,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/feedbackBal"
         android:lines="5"
-        android:background="#00000000"
+        android:background="#F5F5F5"
         android:paddingLeft="20dp"
         android:textColor="#000"
         android:textColorHint="#858585"
-        android:hint="entre your Feedback"
-        android:layout_margin="10dp"/>
+        android:hint="Write your Feedback"
+        android:layout_margin="10dp" />
 
     <Button
         android:id="@+id/btnSendFeedback"

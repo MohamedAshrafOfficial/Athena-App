@@ -65,6 +65,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
             Log.d(TAG, "onBindViewHolder: URI" + mChat.get(position).getUri());
             holder.senderImage.setImageURI(mChat.get(position).getUri());
             holder.senderImage.setVisibility(View.VISIBLE);
+            // holder.show_message.setVisibility(View.GONE);
         }
     }
 

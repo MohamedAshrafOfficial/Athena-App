@@ -1,16 +1,8 @@
 package emad.athena;
 
-import android.app.Activity;
-import android.content.ContentResolver;
-import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
-import android.provider.ContactsContract;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,9 +11,6 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import emad.athena.Adapters.HomePagerAdapter;
-import emad.athena.Fragments.FeautresFragment;
-import emad.athena.Fragments.HomeFragment;
-import emad.athena.Fragments.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void initViews(){
+        Log.d(TAG, "initViews: MAin ");
         moreMenu = findViewById(R.id.moreMenu);
         txHome = findViewById(R.id.txHome);
         txFeautres = findViewById(R.id.txFeautres);

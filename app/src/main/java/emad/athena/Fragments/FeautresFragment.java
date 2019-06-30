@@ -1,17 +1,13 @@
 package emad.athena.Fragments;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.AlarmClock;
 import android.provider.CalendarContract;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
@@ -34,7 +30,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,14 +38,9 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
 import emad.athena.Adapters.NewsAdapter;
-import emad.athena.Model.Chat;
-import emad.athena.Model.ChatbotResponse;
 import emad.athena.Model.News;
-import emad.athena.Model.Recent;
 import emad.athena.R;
 import emad.athena.Tools.Helper;
 import emad.athena.VolleyUtils.MySingleton;
@@ -81,6 +71,18 @@ public class FeautresFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart: FEAutures");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume: Features");
+    }
+
     public void initRecyclerView(View view) {
         newsRecycler = view.findViewById(R.id.newsRecycler);
         newsRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -92,7 +94,6 @@ public class FeautresFragment extends Fragment {
         newsRecycler.setAdapter(newsAdapter);
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////
     public void setUpViews(View view) {
         hiUser = view.findViewById(R.id.hiUser);
         LMessage = view.findViewById(R.id.LMessage);
@@ -108,7 +109,6 @@ public class FeautresFragment extends Fragment {
         Lmusic = view.findViewById(R.id.Lmusic);
         Lgallery = view.findViewById(R.id.Lphotos);
     }
-    //////////////////////////////////////////////////////////////////////////////////////////////
 
     public void handleViews() {
         //for message goodmorning
@@ -192,7 +192,6 @@ public class FeautresFragment extends Fragment {
         });
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////
     public void showNews() {
         String url = "https://newsapi.org/v2/top-headlines?country=eg&apiKey=f6117a26eb70433b91c323fa3ac07e56";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -243,13 +242,11 @@ public class FeautresFragment extends Fragment {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         MySingleton.getmInsance(getContext()).addToRequestQueue(stringRequest);
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////
+
     public void displayNews() {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://news.google.com/?hl=en-US&gl=US&ceid=US:en")));
-
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////
     public void setMessage(Context context) {
         LayoutInflater li = LayoutInflater.from(context);
         View view = li.inflate(R.layout.msg_layout, null);
@@ -283,7 +280,6 @@ public class FeautresFragment extends Fragment {
         alertDialog.show();
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////
     public void sendsms(String phoneNumber, String message) {
 
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + phoneNumber));
@@ -291,7 +287,6 @@ public class FeautresFragment extends Fragment {
         startActivity(intent);
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////
      public String setHI() {
         Calendar now = Calendar.getInstance();
         if (now.get(Calendar.AM_PM) == Calendar.AM) {
@@ -301,15 +296,11 @@ public class FeautresFragment extends Fragment {
         }
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////
-
     public void phoneCall(int length, Context context) {
         Intent intent =new Intent(Intent.ACTION_DIAL);
         intent.setData(Uri.parse("tel:"+length));
         startActivity(intent);
     }
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void startphonecall(final Context context) {
         LayoutInflater li = LayoutInflater.from(context);
@@ -345,8 +336,6 @@ public class FeautresFragment extends Fragment {
 
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////
-
     public void startTimer(final Context context) {
         LayoutInflater li = LayoutInflater.from(context);
         View view = li.inflate(R.layout.timer_layout, null);
@@ -381,7 +370,6 @@ public class FeautresFragment extends Fragment {
 
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////
     public void setTimer(int length, Context context) {
         Intent intent = new Intent(AlarmClock.ACTION_SET_TIMER)
                 .putExtra(AlarmClock.EXTRA_MESSAGE, "Set Timer")
@@ -392,7 +380,6 @@ public class FeautresFragment extends Fragment {
         }
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////
     public void startEvent(final Context context) {
         LayoutInflater li = LayoutInflater.from(context);
         View view = li.inflate(R.layout.event_layout, null);
@@ -428,7 +415,6 @@ public class FeautresFragment extends Fragment {
 
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////
     public void addEvent(String Title, String Country, int beginTime, int endTime, Context context) {
         Intent intent = new Intent(Intent.ACTION_INSERT)
                 .setData(CalendarContract.Events.CONTENT_URI)
@@ -441,7 +427,6 @@ public class FeautresFragment extends Fragment {
         }
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////
     public void startRemender(final Context context) {
         LayoutInflater li = LayoutInflater.from(context);
         View view = li.inflate(R.layout.remainder_layout, null);
@@ -477,7 +462,6 @@ public class FeautresFragment extends Fragment {
 
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////
     public void addReminder(String alarmName, int hours, int miniutes, Context context) {
         Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM)
                 .putExtra(AlarmClock.EXTRA_MESSAGE, alarmName)
@@ -489,7 +473,6 @@ public class FeautresFragment extends Fragment {
 
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////
     public void getWeather(final Context context) {
         String url = "https://api.openweathermap.org/data/2.5/weather?q=Tanta,EG&appid=f5610e8a5c1e5d842551edbc6e5226f8&units=Imperial";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -562,18 +545,15 @@ public class FeautresFragment extends Fragment {
         requestQueue.add(jsonObjectRequest);
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////
     public void playMusic() {
         Intent intent = new Intent(MediaStore.INTENT_ACTION_MUSIC_PLAYER);
         startActivity(intent);
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////
     public void openYoutube() {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com")));
 
     }
-    //////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void openGallery() {
         Intent intent = new Intent();
@@ -582,30 +562,10 @@ public class FeautresFragment extends Fragment {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
-    //////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void playGame() {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/search?client=opera&q=play+a+game&sourceid=opera&ie=UTF-8&oe=UTF-8")));
 
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////
-//    @Override
-//    public void onActivityResult(int reqCode, int resultCode, Intent data) {
-//        super.onActivityResult(reqCode, resultCode, data);
-//
-//        switch (reqCode) {
-//            case (1):
-//                if (resultCode == Activity.RESULT_OK) {
-//                    Uri contactData = data.getData();
-//                    Cursor c = getContentResolver().query(contactData, null, null, null, null);
-//                    if (c.moveToFirst()) {
-//                        String name = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-//                        // TODO Whatever you want to do with the selected contact name.
-//                    }
-//                }
-//                break;
-//        }
-//    }
-    //////////////////////////////////////////////////////////////////////////////////////////////////
 }

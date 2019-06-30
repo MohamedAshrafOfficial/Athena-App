@@ -2,8 +2,8 @@ package emad.athena.Adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,9 +15,7 @@ import android.widget.TextView;
 import com.comix.rounded.RoundedCornerImageView;
 import com.squareup.picasso.Picasso;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import emad.athena.Model.News;
 import emad.athena.R;
@@ -70,7 +68,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
         }
     }
 
-    public void displayItem(News news){
+    public void displayItem(final News news) {
         LayoutInflater li = LayoutInflater.from(context);
         View view = li.inflate(R.layout.display_news, null);
 
@@ -84,15 +82,26 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
          ImageView displayImageNews = view.findViewById(R.id.displayImageNews);
          TextView displayNewsTitle = view.findViewById(R.id.displayNewsTitle);
          TextView displayNewsDesc = view.findViewById(R.id.displayNewsDesc);
+        TextView seeMore = view.findViewById(R.id.seeMore);
 
          source.setText(news.getName());
          Picasso.get().load(news.getUrlToImage()).placeholder(R.drawable.placeholder).into(displayImageNews);
          displayNewsTitle.setText(news.getTitle());
          displayNewsDesc.setText(news.getDescription());
-
-
+        seeMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moreDetails(news.getUrl());
+            }
+        });
 
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
+    }
+
+    public void moreDetails(String link) {
+        Uri uri = Uri.parse(link);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        context.startActivity(intent);
     }
 }

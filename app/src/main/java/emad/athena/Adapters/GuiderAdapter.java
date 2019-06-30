@@ -44,7 +44,7 @@ public class GuiderAdapter extends RecyclerView.Adapter<GuiderAdapter.MyViewHold
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int i) {
 
         holder.recentQuetionItem.setText(guiderArrayList.get(i).getAction());
-        holder.recentAnswerItem.setText(guiderArrayList.get(i).getExplain());
+        holder.recentAnswerItem.setText("to " + guiderArrayList.get(i).getAction() + " " + guiderArrayList.get(i).getExplain());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,10 +52,12 @@ public class GuiderAdapter extends RecyclerView.Adapter<GuiderAdapter.MyViewHold
                     expandedArrayList[i] = false;
                     holder.viewAnswerIcon.setImageResource(R.drawable.epand_less);
                     holder.recentAnswerItem.setVisibility(View.VISIBLE);
+                    holder.recentQuetionItem.setVisibility(View.GONE);
                 }else {
                     expandedArrayList[i] = true;
                     holder.viewAnswerIcon.setImageResource(R.drawable.epand_more);
                     holder.recentAnswerItem.setVisibility(View.GONE);
+                    holder.recentQuetionItem.setVisibility(View.VISIBLE);
                 }
 
             }
