@@ -810,7 +810,6 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
                 return answer;
             }
         }
-
         // check if he want to add image to db
         if (filterdQuestion.contains("add person")) {
             Intent intent = new Intent();
@@ -861,7 +860,8 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
             } catch (Exception ex) {
                 answer = "I Can`t recognize this app";
             }
-        } else if (filterdQuestion.startsWith("read page") || filterdQuestion.startsWith("read image") || filterdQuestion.contains("convert image") || filterdQuestion.contains("translate image")) {
+        }
+        else if (filterdQuestion.startsWith("read page") || filterdQuestion.startsWith("read image") || filterdQuestion.contains("convert image") || filterdQuestion.contains("translate image")) {
             int flagFoundAr =0;
             String[] filterdList = filterdQuestion.split(" ");
             for (int ar = 0; ar <filterdList.length ; ar++) {
@@ -907,11 +907,20 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
                     @Override
                     public void onResponse(String response) {
                         chatbotResponse =new Gson().fromJson(response, ChatbotResponse.class);
-                        chatList.add(new Chat(chatbotResponse.getReply(), 0, null, profilePic));
-                        chatAdapter.notifyDataSetChanged();
-                        chatRecycler.smoothScrollToPosition(chatList.size() - 1);
-                        recentQuestion = new Recent(voice, chatbotResponse.getReply(), helper.getDate(), false);
-                        SendQuetionToFirebase(recentQuestion);
+                        if(!chatbotResponse.getReply().equals("I am sorry! I don't understand you")){
+                            chatList.add(new Chat(chatbotResponse.getReply(), 0, null, profilePic));
+                            chatAdapter.notifyDataSetChanged();
+                            chatRecycler.smoothScrollToPosition(chatList.size() - 1);
+                            recentQuestion = new Recent(question, chatbotResponse.getReply(), helper.getDate(), false);
+                            SendQuetionToFirebase(recentQuestion);
+                        }else {
+                            chatList.add(new Chat("you will directed to Google", 0, null, profilePic));
+                            chatAdapter.notifyDataSetChanged();
+                            chatRecycler.smoothScrollToPosition(chatList.size() - 1);
+                            recentQuestion = new Recent(question, "you will directed to Google", helper.getDate(), false);
+                            SendQuetionToFirebase(recentQuestion);
+                            googleDirect(question);
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -920,7 +929,16 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
                 chatAdapter.notifyDataSetChanged();
                 chatRecycler.smoothScrollToPosition(chatList.size() - 1);
                 // direct google
+
                 googleDirect(question);
+                chatList.add(new Chat("you will directed to Google Server 500", 0, null, profilePic));
+                chatAdapter.notifyDataSetChanged();
+                chatRecycler.smoothScrollToPosition(chatList.size() - 1);
+                recentQuestion = new Recent(question, "you will directed to Google", helper.getDate(), false);
+                SendQuetionToFirebase(recentQuestion);
+                googleDirect(question);
+
+
                 Log.d(TAG, "getChatbotAnswer: " + error.getMessage());
                 Log.d(TAG, "getChatbotAnswer: " + error);
                 Log.d(TAG, "getChatbotAnswer: " + error.networkResponse);
@@ -1017,7 +1035,7 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
         for (int i = 0; i < name.length; i++) {
             modifiedPersonName += name[i].substring(0, 1).toUpperCase() + name[i].substring(1) + " ";
         }
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://athena-assistant.herokuapp.com/assistant/add",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://102927.c.time4vps.cloud/assistant/add",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -1058,7 +1076,7 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
 
     public String recognizeImage(final String mImageURL) {
         final String[] requestResponse = {null};
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://athena-assistant.herokuapp.com/assistant/recognize",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://102927.c.time4vps.cloud/assistant/recognize",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -1085,7 +1103,6 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-
                 params.put("imgUrl", mImageURL);
                 params.put("auth", "GxsQXvHY5XMo@4%");
                 return params;
