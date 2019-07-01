@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:text="Already a member? Sign in !"
+                android:text="Don`t have Account? Sign up"
                 android:textColor="#fff" />
 
 

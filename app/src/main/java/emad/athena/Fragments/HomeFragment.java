@@ -65,6 +65,10 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -911,6 +915,9 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
                             chatList.add(new Chat(chatbotResponse.getReply(), 0, null, profilePic));
                             chatAdapter.notifyDataSetChanged();
                             chatRecycler.smoothScrollToPosition(chatList.size() - 1);
+                            if (flagReadVoice==1){
+                                tts.speak(chatbotResponse.getReply(), TextToSpeech.QUEUE_FLUSH,null);
+                            }
                             recentQuestion = new Recent(question, chatbotResponse.getReply(), helper.getDate(), false);
                             SendQuetionToFirebase(recentQuestion);
                         }else {
@@ -919,6 +926,9 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
                             chatRecycler.smoothScrollToPosition(chatList.size() - 1);
                             recentQuestion = new Recent(question, "you will directed to Google", helper.getDate(), false);
                             SendQuetionToFirebase(recentQuestion);
+                            if (flagReadVoice==1){
+                                tts.speak("you will directed to Google", TextToSpeech.QUEUE_FLUSH,null);
+                            }
                             googleDirect(question);
                         }
                     }
@@ -1082,9 +1092,24 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
                     public void onResponse(String response) {
                         Log.d(TAG, "onResponse: RESPONSE Recognize " + response);
 //                        responseV.setText(response);
-                        requestResponse[0] = response;
-                        progressDialog.hide();
-                        chatList.add(new Chat(requestResponse[0], 0, null, profilePic));
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String jsonData = jsonObject.getString("faces");
+                            String[] elem = jsonData.split(",");
+
+                            Log.d(TAG, "onResponse: GGGG " + elem[0]);
+                            Log.d(TAG, "onResponse: GGGG " + elem[1].substring(1,elem[1].length()-1));
+                            Log.d(TAG, "onResponse: GGGG " + elem[2]);
+
+
+                            progressDialog.hide();
+                            chatList.add(new Chat(elem[1].substring(2,elem[1].length()-1), 0, null, profilePic));
+                            chatAdapter.notifyDataSetChanged();
+                            chatRecycler.smoothScrollToPosition(chatList.size()-1);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
 
                     }
                 }, new Response.ErrorListener() {
