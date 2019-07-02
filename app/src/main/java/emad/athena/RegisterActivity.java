@@ -103,35 +103,39 @@ public class RegisterActivity extends AppCompatActivity {
             if (passwordReg.getText().toString().equals(rePasswordReg.getText().toString())) {
                 Log.d(TAG, "onClick: HELLO");
 
+                if (passwordReg.getText().toString().length()>= 8) {
 
-                final ProgressDialog progressDialog = new ProgressDialog(RegisterActivity.this);
-                progressDialog.setMessage("please wait ....");
-                progressDialog.show();
 
-                // add user to firebase
-                mAuth.createUserWithEmailAndPassword(mailReg.getText().toString(), passwordReg.getText().toString())
-                        .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    progressDialog.dismiss();
-                                    Log.d(TAG, "createUserWithEmail:success");
-                                    FirebaseUser currentUser = mAuth.getCurrentUser();
-                                    Log.d(TAG, "onComplete: " + currentUser.getUid());
-                                    user = new User(currentUser.getUid(), nameRegister.getText().toString(), mailReg.getText().toString(), passwordReg.getText().toString(), phoneReg.getText().toString(), spinnerGender.getSelectedItem().toString(), defaultPic);
-                                    usersReference.child(currentUser.getUid()).setValue(user);
-                                    addToSharedPreferences();
-                                    startActivity(new Intent(RegisterActivity.this, ProfileImageActivity.class));
-                                    finish();
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Log.w(TAG, "createUserWifEmail:failure", task.getException());
-                                    progressDialog.dismiss();
-                                    showSnack("Authentication failed.");
+                    final ProgressDialog progressDialog = new ProgressDialog(RegisterActivity.this);
+                    progressDialog.setMessage("please wait ....");
+                    progressDialog.show();
+
+                    // add user to firebase
+                    mAuth.createUserWithEmailAndPassword(mailReg.getText().toString(), passwordReg.getText().toString())
+                            .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        progressDialog.dismiss();
+                                        Log.d(TAG, "createUserWithEmail:success");
+                                        FirebaseUser currentUser = mAuth.getCurrentUser();
+                                        Log.d(TAG, "onComplete: " + currentUser.getUid());
+                                        user = new User(currentUser.getUid(), nameRegister.getText().toString(), mailReg.getText().toString(), passwordReg.getText().toString(), phoneReg.getText().toString(), spinnerGender.getSelectedItem().toString(), defaultPic);
+                                        usersReference.child(currentUser.getUid()).setValue(user);
+                                        addToSharedPreferences();
+                                        startActivity(new Intent(RegisterActivity.this, ProfileImageActivity.class));
+                                        finish();
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Log.w(TAG, "createUserWifEmail:failure", task.getException());
+                                        progressDialog.dismiss();
+                                        showSnack(task.getException().getMessage());
+                                    }
                                 }
-                            }
-                        });
-
+                            });
+                }else {
+                    showSnack("Password must be more than 8 digits");
+                }
             } else {
                 showSnack("Passwords not Identical");
             }

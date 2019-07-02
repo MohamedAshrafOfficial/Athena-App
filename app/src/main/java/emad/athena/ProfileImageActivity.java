@@ -61,11 +61,18 @@ public class ProfileImageActivity extends AppCompatActivity {
     }
 
     public void updateInfo(View view) {
-        addImageToFirebase();
+        if (bitmap!=null){
+           addImageToFirebase();
+        }else {
+            startActivity(new Intent(ProfileImageActivity.this, MainActivity.class));
+            finish();
+
+        }
     }
 
     public void skip(View view) {
         startActivity(new Intent(ProfileImageActivity.this, MainActivity.class));
+        finish();
     }
 
     @Override
@@ -117,6 +124,7 @@ public class ProfileImageActivity extends AppCompatActivity {
                             public void onSuccess(Void aVoid) {
                                 Log.d(TAG, "onSuccess: url updated");
                                 startActivity(new Intent(ProfileImageActivity.this, MainActivity.class));
+                                finish();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override

@@ -418,14 +418,14 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
                         String answer = getNlpAnswerTest(filterQuestion(voice), allApps, isConnected);
                         if (answer.equals("wait")){
 
-                            chatList.add(new Chat("Connecting To Server ...", 0, null, profilePic));
-                            chatAdapter.notifyDataSetChanged();
-                            chatRecycler.smoothScrollToPosition(chatList.size()-1);
-                            recentQuestion = new Recent(voice,answer,helper.getDate(),false);
-                            if (flagReadVoice==1){
-                                tts.speak(answer, TextToSpeech.QUEUE_FLUSH,null);
-                            }
-                            SendQuetionToFirebase(recentQuestion);
+//                            chatList.add(new Chat("Connecting To Server ...", 0, null, profilePic));
+//                            chatAdapter.notifyDataSetChanged();
+//                            chatRecycler.smoothScrollToPosition(chatList.size()-1);
+//                            recentQuestion = new Recent(voice,answer,helper.getDate(),false);
+//                            if (flagReadVoice==1){
+//                                tts.speak(answer, TextToSpeech.QUEUE_FLUSH,null);
+//                            }
+//                            SendQuetionToFirebase(recentQuestion);
                         }else {
                             chatList.add(new Chat(answer, 0, null, profilePic));
                             Log.d(TAG, "onResults: VOICE " + voice);
@@ -461,12 +461,13 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
                         //  voiceInput.setText("You will see text here");
                         //  voiceInput.setTextColor(Color.GRAY);
                         speechRecognizer.stopListening();
-
+                        voiceEditText.setHint(" Search Now");
                         break;
                     case MotionEvent.ACTION_DOWN:
                         //   voiceInput.setText("Listening");
                         //  voiceInput.setTextColor(Color.GRAY);
                         speechRecognizer.startListening(intentSpeech);
+                        voiceEditText.setHint("I`m Listening ....");
                         break;
                 }
 
@@ -941,7 +942,7 @@ public class HomeFragment extends Fragment implements TextToSpeech.OnInitListene
                 // direct google
 
                 googleDirect(question);
-                chatList.add(new Chat("you will directed to Google Server 500", 0, null, profilePic));
+                chatList.add(new Chat("you will directed to Google Server", 0, null, profilePic));
                 chatAdapter.notifyDataSetChanged();
                 chatRecycler.smoothScrollToPosition(chatList.size() - 1);
                 recentQuestion = new Recent(question, "you will directed to Google", helper.getDate(), false);
